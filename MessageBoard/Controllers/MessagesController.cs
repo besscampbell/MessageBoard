@@ -7,19 +7,20 @@ using MessageBoard.Models;
 
 namespace MessageBoard.Controllers
 {
-  [Route("api/messages")]
   [ApiController]
-  public class MessagesController : ControllerBase
+  [ApiVersion("1.0")]
+  [Route("api/1/Messages")]
+  public class MessagesV1Controller : ControllerBase
   {
     private MessageBoardContext _db;
-    public MessagesController(MessageBoardContext db)
+    public MessagesV1Controller(MessageBoardContext db)
     {
       _db = db;
     }
 
     // GET api/messages
     [HttpGet]
-    public ActionResult<IEnumerable<Message>> Get(string post, string author, string group)
+    public ActionResult<IEnumerable<Message>> Get(string post, string author)
     {
       var query = from q in _db.Messages select q;
       if (post != null)
@@ -29,10 +30,6 @@ namespace MessageBoard.Controllers
       if (author != null)
       {
         query = query.Where(entry => entry.MessageAuthor.Contains(author));
-      }
-      if (group != null)
-      {
-        query = query.Where(entry => entry.Group.Contains(group));
       }
       return query.ToList();
     }
@@ -70,6 +67,42 @@ namespace MessageBoard.Controllers
       var messageToDelete = _db.Messages.FirstOrDefault(entry => entry.MessageId == id);
       _db.Messages.Remove(messageToDelete);
       _db.SaveChanges();
+    }
+  }
+
+
+
+
+  [ApiController]
+  [ApiVersion("2.0")]
+  [Route("api/2/Messages")]
+  
+  public class MessagesV2Controller : ControllerBase
+  {
+    private MessageBoardContext _db;
+    public MessagesV2Controller(MessageBoardContext db)
+    {
+      _db = db;
+    }
+
+    // GET api/messages
+    [HttpGet]
+    public ActionResult<IEnumerable<Message>> Get(string post, string author, string group)
+    {
+      var query = from q in _db.Messages select q;
+      if (post != null)
+      {
+        query = query.Where(entry => entry.MessagePost.Contains(post));
+      }
+      if (author != null)
+      {
+        query = query.Where(entry => entry.MessageAuthor.Contains(author));
+      }
+      if (group != null)
+      {
+        query = query.Where(entry => entry.Group.Contains(group));
+      }
+      return query.ToList();
     }
   }
 }
