@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MessageBoard.Models;
+using APIMessageBoard.Models;
 
-namespace MessageBoard.Controllers
+namespace APIMessageBoard.Controllers
 {
   [ApiController]
   [ApiVersion("1.0")]

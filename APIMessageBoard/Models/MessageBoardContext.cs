@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace MessageBoard.Models
+namespace APIMessageBoard.Models
 {
   public class MessageBoardContext : DbContext
   {

@@ -1,4 +1,4 @@
-﻿using MessageBoard.Models;
+﻿using APIMessageBoard.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc.Versioning;
 
-namespace MessageBoard
+namespace APIMessageBoard
 {
     public class Startup
     {
