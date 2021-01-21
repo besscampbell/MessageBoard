@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MessageBoard.Migrations
 {
     [DbContext(typeof(MessageBoardContext))]
-    [Migration("20210120220620_Initial")]
+    [Migration("20210121181941_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,12 +19,24 @@ namespace MessageBoard.Migrations
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("MessageBoard.Models.Group", b =>
+                {
+                    b.Property<int>("GroupId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("GroupName");
+
+                    b.HasKey("GroupId");
+
+                    b.ToTable("Groups");
+                });
+
             modelBuilder.Entity("MessageBoard.Models.Message", b =>
                 {
                     b.Property<int>("MessageId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Group");
+                    b.Property<int>("GroupId");
 
                     b.Property<string>("MessageAuthor");
 
@@ -34,7 +46,17 @@ namespace MessageBoard.Migrations
 
                     b.HasKey("MessageId");
 
+                    b.HasIndex("GroupId");
+
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("MessageBoard.Models.Message", b =>
+                {
+                    b.HasOne("MessageBoard.Models.Group", "Group")
+                        .WithMany("Messages")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

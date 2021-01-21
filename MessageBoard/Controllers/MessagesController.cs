@@ -84,7 +84,7 @@ namespace MessageBoard.Controllers
 
     // GET api/messages
     [HttpGet]
-    public ActionResult<IEnumerable<Message>> Get(string post, string author, string group)
+    public ActionResult<IEnumerable<Message>> Get(string post, string author, Group group)
     {
       var query = from q in _db.Messages select q;
       if (post != null)
@@ -97,7 +97,7 @@ namespace MessageBoard.Controllers
       }
       if (group != null)
       {
-        query = query.Where(entry => entry.Group.Contains(group));
+        query = query.Where(entry => entry.Group.GroupName.Contains(group.GroupName));
       }
       return query.ToList();
     }
