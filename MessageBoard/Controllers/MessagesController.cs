@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using APIMessageBoard.Models;
+using MessageBoard.Models;
 
-namespace APIMessageBoard.Controllers
+namespace MessageBoard.Controllers
 {
   [ApiController]
   [ApiVersion("1.0")]
@@ -69,9 +69,6 @@ namespace APIMessageBoard.Controllers
       _db.SaveChanges();
     }
   }
-
-
-
 
   [ApiController]
   [ApiVersion("2.0")]

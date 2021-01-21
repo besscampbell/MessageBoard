@@ -1,16 +1,33 @@
 using System.Threading.Tasks;
-using Restsharp;
+using RestSharp;
 
 namespace ClientMessageBoard.Models
 {
-  class ApiHelper
+  public class ApiHelper
   {
     public static async Task<string> GetAll()
     {
-      RestClient client = new RestClient("http://localhost:5000/api");
-      RestRequest request = new RestRequest($"messages", Method.GET)
+      RestClient client = new RestClient("http://localhost:5000/api/2");
+      RestRequest request = new RestRequest($"messages", Method.GET);
       var response = await client.ExecuteTaskAsync(request);
       return response.Content;
+    }
+
+    public static async Task<string> Get(int id)
+    {
+      RestClient client = new RestClient("http://localhost:5000/api/1");
+      RestRequest request = new RestRequest($"messages/{id}", Method.GET);
+      var response = await client.ExecuteTaskAsync(request);
+      return response.Content;
+    }
+
+    public static async Task Post(string newMessage)
+    {
+      RestClient client = new RestClient("http://localhost:5000/api/1");
+      RestRequest request = new RestRequest("messages", Method.POST);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newMessage);
+      var response = await client.ExecuteTaskAsync(request);
     }
   }
 }

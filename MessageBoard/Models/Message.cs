@@ -1,6 +1,6 @@
 using System;
 
-namespace APIMessageBoard.Models
+namespace MessageBoard.Models
 {
     public class Message
     {

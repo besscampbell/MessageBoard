@@ -1,0 +1,14 @@
+<h1>Messages</h1>
+
+<ol>
+@foreach (Message message in Model)
+{
+  <ul>
+    <li>Author: @message.MessageAuthor</li>
+    <li>Date: @message.MessageDate</li>
+    <li>Group: @message.Group</li>
+  </ul>
+  <a href="/Messages/Details/@(message.MessageId)"><p>View Details</p></a>
+  <br>
+}
+</ol>
