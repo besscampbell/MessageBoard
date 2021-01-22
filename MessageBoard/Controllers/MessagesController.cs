@@ -9,7 +9,7 @@ namespace MessageBoard.Controllers
 {
   [ApiController]
   [ApiVersion("1.0")]
-  [Route("api/1/Messages")]
+  [Route("api/1/messages")]
   public class MessagesV1Controller : ControllerBase
   {
     private MessageBoardContext _db;
@@ -72,7 +72,7 @@ namespace MessageBoard.Controllers
 
   [ApiController]
   [ApiVersion("2.0")]
-  [Route("api/2/Messages")]
+  [Route("api/2/messages")]
   
   public class MessagesV2Controller : ControllerBase
   {
